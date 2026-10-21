@@ -51,11 +51,28 @@ nav {
   background-color: #fff;
   margin-left: 3px;
   vertical-align: baseline;
-  animation: blink 1s steps(1) infinite;
+  animation: blink 1s steps(1) 1.5s infinite;
 }
 
-@keyframes blink{
-  50% {opacity: 0;}
+@keyframes blink {
+  50% {
+    opacity: 0;
+  }
+}
+
+.typed {
+  display: inline-block;
+  overflow: hidden;
+  white-space: nowrap;
+  vertical-align: bottom;
+  width: 0;
+  animation: type 1.2s steps(8) 0.3s forwards;
+}
+
+@keyframes type {
+  to {
+    width: 8ch;
+  }
 }
 
 nav ul {
@@ -109,7 +126,7 @@ section:not(#home) {
 
 #home img {
   width: 380px;
-  height: 380px;
+  height: auto;
   border-radius: 50%;
   border: 4px solid #9b1b30;
   box-shadow: 0 0 25px #9b1b30;
@@ -148,8 +165,31 @@ section:not(#home) {
   margin-right: 5px;
 }
 
-.hero-text a:hover {
+.hero-text a,
+.links a,
+.contact-form button {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+.hero-text a::before,
+.links a::before,
+.contact-form button::before {
+  content: "";
+  position: absolute;
+  inset: 0;
   background: #9b1b30;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.35s ease;
+  z-index: -1;
+}
+
+.hero-text a:hover::before,
+.links a:hover::before,
+.contact-form button:hover::before {
+  transform: scaleX(1);
 }
 
 section h2 {
@@ -302,10 +342,6 @@ section h2::after {
   transition: background 0.3s;
 }
 
-.links a:hover {
-  background: #9b1b30;
-}
-
 .contact-container {
   display: flex;
   gap: 4rem;
@@ -349,10 +385,6 @@ section h2::after {
   font-size: 1rem;
   cursor: pointer;
   transition: background 0.3s;
-}
-
-.contact-form button:hover {
-  background: #9b1b30;
 }
 
 .form {
@@ -533,5 +565,31 @@ footer {
 
   .social {
     font-size: 2.5rem;
+  }
+}
+
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(100px) scale(0.95);
+    filter: blur(2px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    filter: blur(0);
+  }
+}
+
+@supports (animation-timeline: view()) {
+
+  section h2,
+  #about p,
+  .skills-grid,
+  .project,
+  .contact-container {
+    animation: fade-up linear both;
+    animation-timeline: view();
+    animation-range: entry 0% cover 30%;
   }
 }
