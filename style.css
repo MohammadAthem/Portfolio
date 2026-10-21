@@ -29,10 +29,33 @@ nav {
 }
 
 .logo {
-  color: #fff;
-  font-size: 1.5rem;
+  font-family: 'Consolas', 'Courier New', monospace;
+  font-size: 1.4rem;
   font-weight: bold;
   text-decoration: none;
+  color: white;
+}
+
+.prompt-user {
+  color: #9b1b30;
+}
+
+.prompt-dim {
+  color: #777;
+}
+
+.cursor {
+  display: inline-block;
+  width: 0.6em;
+  height: 3px;
+  background-color: #fff;
+  margin-left: 3px;
+  vertical-align: baseline;
+  animation: blink 1s steps(1) infinite;
+}
+
+@keyframes blink{
+  50% {opacity: 0;}
 }
 
 nav ul {
